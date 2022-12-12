@@ -25,8 +25,6 @@ services:
       - db
   db:
     image: postgres:14-alpine
-    build:
-      context: .
     environment:
       - POSTGRES_DB=ethwallet
       - POSTGRES_USER=ethwallet

@@ -12,15 +12,8 @@ services:
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
-    environment:
-      - DB_HOST=db
-      - DB_NAME=ethwallet
-      - DB_USER=ethwallet
-      - DB_PASSWORD=ethwallet
-      - SECRET_KEY=django-insecure-962$l*q&6a(5opvn)@&%f1krrm-@q7g^aw8!d3yii^(k7fdvkt
-      - PROVIDER_API_KEY=6fd8ac1ebdb54ae6b31c4e77153e86ab
-      - ETHERSCAN_API_KEY=5NCHHSZJ4S4XTP82U6EVGM8PZ85PK4BFYQ
-
+    env_file:
+      - .env
     depends_on:
       - db
   db:

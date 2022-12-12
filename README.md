@@ -1,4 +1,5 @@
-# rest-api-hd-wallet
+# eth hd wallet
+
 
 ## Installation
 
@@ -14,3 +15,8 @@ docker-compose up
 * HD wallets creation
 * Send transactions
 * Filter transactions
+
+### WARNING!!!
+
+- transaction works in TESTNET - Sepolia
+- this is study project DO NOT USE YOUR MAINNET WALLETS & CURRENCIES

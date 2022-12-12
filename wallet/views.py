@@ -73,7 +73,6 @@ class WalletViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
     @extend_schema(
         parameters=[
             OpenApiParameter(
@@ -113,35 +112,20 @@ class WalletViewSet(viewsets.ModelViewSet):
 
         for transaction_data in json.loads(response.text)["result"]:
 
+            transaction_data["wallet_from"] = transaction_data["from"]
+            transaction_data["timeStamp"] = datetime.fromtimestamp(
+                int(transaction_data["timeStamp"])
+            )
+
             if amount:
                 if transaction_data["value"] == amount:
-                    transaction_data["wallet_from"] = transaction_data["from"]
-                    transaction_data["timeStamp"] = datetime.fromtimestamp(
-                        int(transaction_data["timeStamp"])
-                    )
                     transactions.append(transaction_data)
 
             if address_to:
                 if transaction_data["to"] == address_to:
-                    transaction_data["wallet_from"] = transaction_data["from"]
-                    transaction_data["timeStamp"] = datetime.fromtimestamp(
-                        int(transaction_data["timeStamp"])
-                    )
-                    transactions.append(transaction_data)
-
-            if address_to:
-                if transaction_data["to"] == address_to:
-                    transaction_data["wallet_from"] = transaction_data["from"]
-                    transaction_data["timeStamp"] = datetime.fromtimestamp(
-                        int(transaction_data["timeStamp"])
-                    )
                     transactions.append(transaction_data)
 
             if request.query_params == {}:
-                transaction_data["wallet_from"] = transaction_data["from"]
-                transaction_data["timeStamp"] = datetime.fromtimestamp(
-                    int(transaction_data["timeStamp"])
-                )
                 transactions.append(transaction_data)
 
         results = TransactionSerializer(transactions, many=True).data

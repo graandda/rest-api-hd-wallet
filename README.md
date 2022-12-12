@@ -1,4 +1,4 @@
-# rest-api-hd-wall
+# rest-api-hd-wallet
 
 ## Installation
 
